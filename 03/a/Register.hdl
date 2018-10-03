@@ -1,0 +1,88 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/Register.hdl
+
+/**
+ * 16-bit register:
+ * If load[t] == 1 then out[t+1] = in[t]
+ * else out does not change
+ */
+
+CHIP Register {
+    IN in[16], load;
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    Mux16 (b=in, sel=load, 
+      a[0]=dOut00,
+      a[1]=dOut01,
+      a[2]=dOut02,
+      a[3]=dOut03,
+      a[4]=dOut04,
+      a[5]=dOut05,
+      a[6]=dOut06,
+      a[7]=dOut07,
+      a[8]=dOut08,
+      a[9]=dOut09,
+      a[10]=dOut10,
+      a[11]=dOut11,
+      a[12]=dOut12,
+      a[13]=dOut13,
+      a[14]=dOut14,
+      a[15]=dOut15,
+      out[0]=mOut00,
+      out[1]=mOut01,
+      out[2]=mOut02,
+      out[3]=mOut03,
+      out[4]=mOut04,
+      out[5]=mOut05,
+      out[6]=mOut06,
+      out[7]=mOut07,
+      out[8]=mOut08,
+      out[9]=mOut09,
+      out[10]=mOut10,
+      out[11]=mOut11,
+      out[12]=mOut12,
+      out[13]=mOut13,
+      out[14]=mOut14,
+      out[15]=mOut15);
+
+    DFF (in=mOut00, out=dOut00);
+    DFF (in=mOut01, out=dOut01);
+    DFF (in=mOut02, out=dOut02);
+    DFF (in=mOut03, out=dOut03);
+    DFF (in=mOut04, out=dOut04);
+    DFF (in=mOut05, out=dOut05);
+    DFF (in=mOut06, out=dOut06);
+    DFF (in=mOut07, out=dOut07);
+    DFF (in=mOut08, out=dOut08);
+    DFF (in=mOut09, out=dOut09);
+    DFF (in=mOut10, out=dOut10);
+    DFF (in=mOut11, out=dOut11);
+    DFF (in=mOut12, out=dOut12);
+    DFF (in=mOut13, out=dOut13);
+    DFF (in=mOut14, out=dOut14);
+    DFF (in=mOut15, out=dOut15);
+
+    Not16 (out=nOut,
+      in[0]=dOut00,
+      in[1]=dOut01,
+      in[2]=dOut02,
+      in[3]=dOut03,
+      in[4]=dOut04,
+      in[5]=dOut05,
+      in[6]=dOut06,
+      in[7]=dOut07,
+      in[8]=dOut08,
+      in[9]=dOut09,
+      in[10]=dOut10,
+      in[11]=dOut11,
+      in[12]=dOut12,
+      in[13]=dOut13,
+      in[14]=dOut14,
+      in[15]=dOut15);
+    Not16 (in=nOut, out=out);
+
+}
